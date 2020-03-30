@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.szh.mapper.ShapeInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.szh.bean.ShapeInfo" >
+    <id column="mark_id" property="markId" jdbcType="VARCHAR" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mark_id, theme, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_shape_info
+    where mark_id = #{markId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_shape_info
+    where mark_id = #{markId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.szh.bean.ShapeInfo" >
+    insert into t_shape_info (mark_id, theme, description
+      )
+    values (#{markId,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.szh.bean.ShapeInfo" >
+    insert into t_shape_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="markId != null" >
+        mark_id,
+      </if>
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="markId != null" >
+        #{markId,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.szh.bean.ShapeInfo" >
+    update t_shape_info
+    <set >
+      <if test="theme != null" >
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mark_id = #{markId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.szh.bean.ShapeInfo" >
+    update t_shape_info
+    set theme = #{theme,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where mark_id = #{markId,jdbcType=VARCHAR}
+  </update>
+</mapper>
